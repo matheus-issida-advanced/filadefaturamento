@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\matheus.issida\\Desktop\\Fila de faturamento\\FinanceiroKanban\\FinanceiroKanban\\FinanceiroKanban.csproj": {}
+    "C:\\Users\\matheus.issida\\OneDrive - Advanced Informatica Ltda\\Documentos\\GitHub\\filadefaturamento\\FinanceiroKanban.csproj": {}
   },
   "projects": {
-    "C:\\Users\\matheus.issida\\Desktop\\Fila de faturamento\\FinanceiroKanban\\FinanceiroKanban\\FinanceiroKanban.csproj": {
+    "C:\\Users\\matheus.issida\\OneDrive - Advanced Informatica Ltda\\Documentos\\GitHub\\filadefaturamento\\FinanceiroKanban.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matheus.issida\\Desktop\\Fila de faturamento\\FinanceiroKanban\\FinanceiroKanban\\FinanceiroKanban.csproj",
+        "projectUniqueName": "C:\\Users\\matheus.issida\\OneDrive - Advanced Informatica Ltda\\Documentos\\GitHub\\filadefaturamento\\FinanceiroKanban.csproj",
         "projectName": "FinanceiroKanban",
-        "projectPath": "C:\\Users\\matheus.issida\\Desktop\\Fila de faturamento\\FinanceiroKanban\\FinanceiroKanban\\FinanceiroKanban.csproj",
+        "projectPath": "C:\\Users\\matheus.issida\\OneDrive - Advanced Informatica Ltda\\Documentos\\GitHub\\filadefaturamento\\FinanceiroKanban.csproj",
         "packagesPath": "C:\\Users\\matheus.issida\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matheus.issida\\Desktop\\Fila de faturamento\\FinanceiroKanban\\FinanceiroKanban\\obj\\",
+        "outputPath": "C:\\Users\\matheus.issida\\OneDrive - Advanced Informatica Ltda\\Documentos\\GitHub\\filadefaturamento\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\matheus.issida\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\matheus.issida\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

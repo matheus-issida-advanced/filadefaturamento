@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FK4f4S+94WI=",
+  "dgSpecHash": "YNfEEerINEw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\matheus.issida\\Desktop\\Fila de faturamento\\FinanceiroKanban\\FinanceiroKanban\\FinanceiroKanban.csproj",
+  "projectFilePath": "C:\\Users\\matheus.issida\\OneDrive - Advanced Informatica Ltda\\Documentos\\GitHub\\filadefaturamento\\FinanceiroKanban.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\matheus.issida\\.nuget\\packages\\dapper\\2.1.79\\dapper.2.1.79.nupkg.sha512",
     "C:\\Users\\matheus.issida\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.11\\microsoft.aspnetcore.app.internal.assets.10.0.11.nupkg.sha512",
