@@ -1,0 +1,157 @@
+@page "/"
+@inject OsDataService OsService
+@inject IJSRuntime JS
+@implements IDisposable
+@if (_carregando)
+{
+    <p style="padding:1.5rem;">Carregando pedidos...</p>
+}
+else
+{
+<div class="board">
+    @foreach (var coluna in _colunas)
+    {
+        var itens = OsService.ObterPorStatus(coluna.Status).ToList();
+        var total = itens.Sum(i => i.Valor);
+
+        <section class="column column--@coluna.CssClass">
+            <header class="column-header">
+                <div class="column-title">
+                    <span class="dot"></span>
+                    <h2>@coluna.Titulo</h2>
+                </div>
+                <span class="column-count">@itens.Count</span>
+            </header>
+
+            <div class="column-body">
+                @if (itens.Count == 0)
+                {
+                    <p class="empty-state">Nenhuma OS nesta situação.</p>
+                }
+                else
+                {
+                    @foreach (var item in itens)
+                    {
+                        <article class="card">
+                            <div class="card-top">
+                                <span class="card-id" title="@item.CodIntOS">@FormatarCodigo(item.CodIntOS)</span>
+
+                                <details class="menu">
+                                    <summary aria-label="Mais opções">⋯</summary>
+                                    <ul class="menu-list">
+                                        <li>
+                                            <button class="menu-item"
+                                                    disabled="@(item.Status == OsStatus.EmFila)"
+                                                    @onclick="() => VoltarParaFila(item)">
+                                                ↩ Voltar para fila
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="menu-item"
+                                                    disabled="@(item.Status == OsStatus.Congelada)"
+                                                    @onclick="() => Congelar(item)">
+                                                ❄ Congelar
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="menu-item menu-item--danger"
+                                                    disabled="@(item.Status == OsStatus.Cancelada)"
+                                                    @onclick="() => Cancelar(item)">
+                                                ✕ Cancelar
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </details>
+                            </div>
+
+                            <h3 class="card-client">@item.Cliente</h3>
+                            <p class="card-cnpj">@item.Cnpj</p>
+                            <p class="card-product">@item.Produto</p>
+
+                            <div class="card-meta">
+                                <span class="card-value">@item.Valor.ToString("C2", _culture)</span>
+                                <span class="card-date">@item.DataCriacao.ToString("dd/MM/yyyy")</span>
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(item.Po) || !string.IsNullOrWhiteSpace(item.Responsavel))
+                            {
+                                <div class="card-extra">
+                                    @if (!string.IsNullOrWhiteSpace(item.Po))
+                                    {
+                                        <span>PO: @item.Po</span>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(item.Responsavel))
+                                    {
+                                        <span>Resp.: @item.Responsavel</span>
+                                    }
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(item.Observacao))
+                            {
+                                <p class="card-note">@item.Observacao</p>
+                            }
+                        </article>
+                    }
+                }
+            </div>
+
+            <footer class="column-footer">
+                Total: <strong>@total.ToString("C2", _culture)</strong>
+            </footer>
+        </section>
+    }
+</div>
+}
+@code {
+    private readonly System.Globalization.CultureInfo _culture = new("pt-BR");
+    private bool _carregando = true;
+
+    private sealed record Coluna(OsStatus Status, string Titulo, string CssClass);
+
+    private readonly List<Coluna> _colunas = new()
+    {
+        new(OsStatus.EmFila,     "OS em fila",     "fila"),
+        new(OsStatus.Congelada,  "OS congeladas",  "congelada"),
+        new(OsStatus.Cancelada,  "OS canceladas",  "cancelada"),
+        new(OsStatus.Finalizada, "OS finalizadas", "finalizada"),
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        OsService.OnChange += AtualizarTela;
+        await OsService.CarregarAsync();
+        _carregando = false;
+    }
+
+    private void AtualizarTela() => InvokeAsync(StateHasChanged);
+
+    private static string FormatarCodigo(string codIntOS)
+    {
+        var partes = codIntOS.Split('_');
+        return partes.Length > 0 ? partes[^1] : codIntOS;
+    }
+
+    private async Task VoltarParaFila(OsItem item) =>
+        await OsService.AlterarStatusAsync(item.CodIntOS, OsStatus.EmFila);
+
+    private async Task Congelar(OsItem item) =>
+        await OsService.AlterarStatusAsync(item.CodIntOS, OsStatus.Congelada);
+
+    private async Task Cancelar(OsItem item)
+    {
+        var confirmado = await JS.InvokeAsync<bool>(
+            "confirm",
+            $"Cancelar a OS {item.CodIntOS}?");
+
+        if (confirmado)
+        {
+            await OsService.AlterarStatusAsync(item.CodIntOS, OsStatus.Cancelada);
+        }
+    }
+
+    public void Dispose()
+    {
+        OsService.OnChange -= AtualizarTela;
+    }
+}

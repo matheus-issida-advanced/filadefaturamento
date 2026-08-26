@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fila de Arrependimento — Financeiro</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/site.css" />
+    <HeadOutlet />
+</head>
+<body>
+    <Routes @rendermode="RenderMode.InteractiveServer" />
+    <script src="_framework/blazor.web.js"></script>
+    <script>
+        document.addEventListener('click', function (event) {
+            document.querySelectorAll('details.menu[open]').forEach(function (menu) {
+                if (!menu.contains(event.target)) {
+                    menu.removeAttribute('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
