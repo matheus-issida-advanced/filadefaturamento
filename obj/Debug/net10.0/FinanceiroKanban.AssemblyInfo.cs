@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FinanceiroKanban")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c1ef1cba3cfd353e77f0760b29bc417f120effa")]
 [assembly: System.Reflection.AssemblyProductAttribute("FinanceiroKanban")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FinanceiroKanban")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
